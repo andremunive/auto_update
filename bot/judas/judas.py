@@ -1,8 +1,9 @@
 import os
 import subprocess
 import requests
+import time
 
-REPO_URL = "https://github.com/andremunive/auto_update/tree/master"
+REPO_URL = "https://raw.githubusercontent.com/andremunive/auto_update/master"
 
 def get_local_version():
     try:
@@ -20,6 +21,8 @@ def get_remote_version():
 def update_script():
     response = requests.get(REPO_URL + "/bot/judas/myscript.py")
     if response.status_code == 200:
+        print(response.text)
+        time.sleep(500)
         with open("myscript.py", 'w') as f:
             f.write(response.text)
         print("Script updated successfully.")
